@@ -879,6 +879,8 @@ class _FullyFusedProjection(torch.autograd.Function):
             v_scales = None
         if not ctx.needs_input_grad[4]:
             v_viewmats = None
+        
+        torch.nan_to_num_(v_means, nan=0.0, posinf=0.0, neginf=0.0)
         return (
             v_means,
             v_covars,
